@@ -109,7 +109,7 @@ foreach ($stmt2->fetchAll(PDO::FETCH_ASSOC) as $row) {
                                 <input type="DATE" id="date2" >
                             </div>
                         </td>
-                        <td>選擇活動名稱：</td>
+                        <td>選擇問卷名稱：</td>
                         <td>
                             <select name="active" id="active" width="300">
                                 <?php echo $res2; ?>
