@@ -1,6 +1,8 @@
 <?php
 
-include './db.php';
+include './db.php';\
+session_start() ;
+$store_id=$_SESSION['store_id'];
 $d1 = $_GET['date1'];
 $d2 = $_GET['date2'];
 $active = $_GET['active'];
@@ -21,6 +23,7 @@ $stmt = $conn->query("select  qb.qst_name,answer
        and qst_type='act'
        and qi.qst_name='".$active."'
         and qst_date between '" . $d1 . "' and '" . $d2 . "'
+         and qi.store_id='".$store_id."'
          order by  qb.qst_name
         ");
 $msg = "";

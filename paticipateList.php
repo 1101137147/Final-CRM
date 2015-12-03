@@ -4,6 +4,8 @@ $chose=$_GET['chose'];
 $d1 = $_GET['date1'];
 $d2 = $_GET['date2'];
 $active=$_GET['active'];
+session_start() ;
+$store_id=$_SESSION['store_id'];
 // if判斷是否選擇活動為空值
 if(!empty($_GET['active'])){
 $stmt = $conn->query("select act_name,CONCAT(start_date, '~', end_date)as date,count(ar.mem_id) as actcount,
@@ -21,6 +23,7 @@ From member as m,act_record as ar ,activity as a
 where m.mem_id = ar.mem_id 
 and a.act_id=ar.act_id 
 and start_date between '".$d1."' and '".$d2."'
+and a.store_id='".$store_id."'
 group by act_name ");  
 }
 $msg = "";

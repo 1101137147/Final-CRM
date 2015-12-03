@@ -1,5 +1,7 @@
 <?php
 include './db.php';
+session_start() ;
+$store_id=$_SESSION['store_id'];
 header("Content-Type:text/html; charset=utf-8");
 //$stmt = $conn->prepare("SELECT subname,path FROM subfunction WHERE functionid='1'");
 //$stmt->execute();
@@ -7,7 +9,7 @@ header("Content-Type:text/html; charset=utf-8");
 //foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
 //    $res.='<li><a href="' . $row['path'] . '.php" style="font-size:12pt" rel="external">' . $row['subname'] . '</a></li>';
 //}
-$stmt2 = $conn->prepare("SELECT qst_name  FROM questionnaire where qst_type='act' ");
+$stmt2 = $conn->prepare("SELECT qst_name  FROM questionnaire  where qst_type='act' and questionnaire.store_id='".$store_id."'");
 $stmt2->execute();
 $res2 = '';
 foreach ($stmt2->fetchAll(PDO::FETCH_ASSOC) as $row) {
