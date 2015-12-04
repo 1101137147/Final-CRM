@@ -37,6 +37,10 @@
                     // var active = $("#active").val();
                     /alert( d1 +"and"+ d2);/
                     if((num1!=='')&&(num2!=='')){
+                       if(num1>num2){
+                            alert("開始日期不能大於結束日期");
+                        }
+                        if(num1<num2){
                     $.ajax({
                         url: "memactlist.php",
                         data: {text1: $("#date1").val(), text2: $("#date2").val()},
@@ -51,6 +55,7 @@
 
                         }
                     });
+                }
                 }else {
                     alert("請選擇日期");
                 }

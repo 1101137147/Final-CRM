@@ -30,6 +30,10 @@
                     var d2 = $("#date2").val();
                     /alert( d1 +"and"+ d2);/
                     if((d1!=='')&&(d2!=='')){
+                          if(d1>d2){
+                            alert("開始日期不能大於結束日期");
+                        }
+                        if(d1<d2){
                     $.ajax({
                         url: "membuylist.php",
                         data: {date1: $("#date1").val(), date2: $("#date2").val()},
@@ -44,6 +48,7 @@
                             document.getElementById("info1").innerHTML = "error";
                         }
                     });
+                }
                 }else{
                     alert("請選擇日期")
                 }
