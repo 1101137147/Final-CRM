@@ -13,7 +13,7 @@
         <meta charset="UTF-8">
         <title></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
         <script src="script/jquery-1.11.3.min.js"></script>
         <script src="script/jquery.mobile-1.4.5.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/jqm-datebox.min.css" />
@@ -29,6 +29,7 @@
                     var d1 = $("#date1").val();
                     var d2 = $("#date2").val();
                     /alert( d1 +"and"+ d2);/
+                    if((d1!=='')&&(d2!=='')){
                     $.ajax({
                         url: "membuylist.php",
                         data: {date1: $("#date1").val(), date2: $("#date2").val()},
@@ -43,6 +44,9 @@
                             document.getElementById("info1").innerHTML = "error";
                         }
                     });
+                }else{
+                    alert("請選擇日期")
+                }
                 });
             });
         </script>
@@ -67,7 +71,7 @@
             }
             #title{
                 font-size: 250%;
-                letter-spacing: 45PX;  //文字間距
+                letter-spacing: 15PX;  //文字間距
             }
         </style>
     </head>
@@ -84,15 +88,27 @@
                                 </div>-->
             </div> 
             <div data-role="main" class="ui-content ui-grid-a">
+                <table border="0" align="center">
+                    <tr>
+                        <td>請選擇活動日期：</td>
+                        <td> 
+                            <div class="ui-block-a">
+                                <input type="DATE" id="date1" >
+                            </div>
 
-                <label for="bday">請選擇日期範圍:</label>
-                <div class="ui-block-a">
-                    <input type="DATE" id="date1" >
-                </div>
-                <div class="ui-block-b">
-                    <input type="DATE" id="date2"> 
-                </div>
-                <input type="button" id="btn1" value="確定">
+                        </td>
+                        <td><div>～</div></td>
+                        <td>
+                            <div class="ui-block-a">
+                                <input type="DATE" id="date2" >
+                            </div>
+                        </td>
+                        <td>
+                            <input type="button" id="btn1" value="確定">
+
+                        </td>
+            　</tr>
+                </table>
                 <table id="info1" data-role="table"  class="ui-responsive" border="1">
                 </table>
             </div>

@@ -36,6 +36,7 @@
                     var num2 = $("#date2").val();
                     // var active = $("#active").val();
                     /alert( d1 +"and"+ d2);/
+                    if((num1!=='')&&(num2!=='')){
                     $.ajax({
                         url: "memactlist.php",
                         data: {text1: $("#date1").val(), text2: $("#date2").val()},
@@ -50,6 +51,9 @@
 
                         }
                     });
+                }else {
+                    alert("請選擇日期");
+                }
                 });
             });
 
@@ -93,17 +97,27 @@
                                 </div>-->
             </div>
             <div data-role="main" class="ui-content">     
-                <div data-role="main" class="ui-content ui-grid-a">
+                <table border="0" align="center">
+                    <tr>
+                        <td>請選擇活動日期：</td>
+                        <td> 
+                            <div class="ui-block-a">
+                                <input type="DATE" id="date1" >
+                            </div>
 
-                    <label for="bday">請選擇日期範圍:</label>
-                    <div class="ui-block-a">
-                    <input type="DATE" id="date1" >
-                </div>
-                <div class="ui-block-b">
-                    <input type="DATE" id="date2"> 
-                </div>
-                    <input type="button" id="btn1" value="確定">
+                        </td>
+                        <td><div>～</div></td>
+                        <td>
+                            <div class="ui-block-a">
+                                <input type="DATE" id="date2" >
+                            </div>
+                        </td>
+                        <td>
+                            <input type="button" id="btn1" value="確定">
 
+                        </td>
+            　</tr>
+                </table>
                     <table id="info1" data-role="table"  class="ui-responsive" border="1">
                     </table>
                 </div>

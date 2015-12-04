@@ -40,7 +40,7 @@ foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $row){
     <body>
         <div data-role="page" id="pageone">
             <div data-role="header">
-                 <a href="index.php"  rel="external" class="ui-btn ui-btn-inline ui-corner-all ui-icon-home ui-btn-icon-left btn" style="margin-top:2%;font-size:120%;">首頁</a>
+                             <a href="index.php" rel="external" class="ui-btn ui-btn-inline ui-corner-all ui-icon-home ui-shadow ui-btn-icon-left" style="margin-top:2%;font-size:120%;">首頁</a>
                 <h1 id="title">整合分析</h1>
             </div>
 

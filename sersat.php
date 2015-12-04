@@ -1,5 +1,8 @@
 <?php
-//include './db.php';
+include './db.php';
+session_start() ;
+$store_id=$_SESSION['store_id'];
+header("Content-Type:text/html; charset=utf-8");
 //header("Content-Type:text/html; charset=utf-8");
 //$stmt = $conn->prepare("SELECT subname,path FROM subfunction WHERE functionid='3'");
 //$stmt->execute();
@@ -7,6 +10,12 @@
 //foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
 //    $res.='<li><a href="' . $row['path'] . '.php" style="font-size:12pt" rel="external">' . $row['subname'] . '</a></li>';
 //}
+$stmt2 = $conn->prepare("SELECT qst_name  FROM questionnaire  where qst_type='store' and questionnaire.store_id='".$store_id."'");
+$stmt2->execute();
+$res2 = '';
+foreach ($stmt2->fetchAll(PDO::FETCH_ASSOC) as $row) {
+    $res2.='<option value="' . $row['qst_name'] . '">' . $row['qst_name'] . '</option>';
+}
 ?>
 <html>
     <head>
@@ -31,6 +40,7 @@
                     var active = $("#active").val();
                     //   document.getElementById("actname").innerHTML = active;
                     //    /alert( d1 +"and"+ d2);/
+                    if((d1!=='')&&(d2!='')){
                     $.ajax({
                         url: "storesatlist.php",
                         data: {date1: $("#date1").val(), date2: $("#date2").val(), active: $("#active").val()},
@@ -44,6 +54,9 @@
                             document.getElementById("info1").innerHTML = "error";
                         }
                     });
+                }else{
+                    alert("請選擇日期");
+                }
                 });
             });
 
@@ -69,7 +82,7 @@
             }
             #title{
                 font-size: 250%;
-                letter-spacing: 35PX;  //文字間距
+                letter-spacing: 15PX;  //文字間距
             }
         </style>
 
@@ -88,7 +101,7 @@
             </div>
 
             <div data-role="main" class="ui-content">
-                <table border="0" align="center">
+              <table border="0" align="center">
                     <tr>
                         <td>活動區間</td>
                         <td> 
@@ -103,7 +116,12 @@
                                 <input type="DATE" id="date2" >
                             </div>
                         </td>
-
+                        <td>選擇問卷名稱：</td>
+                        <td>
+                            <select name="active" id="active" width="300">
+                                <?php echo $res2; ?>
+                            </select>
+                        </td>
                         <td>
                             <input type="button" id="chose" value="確定">
 

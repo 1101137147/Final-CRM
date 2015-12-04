@@ -74,7 +74,7 @@ foreach ($stmt2->fetchAll(PDO::FETCH_ASSOC) as $row) {
             }
             #title{
                 font-size: 250%;
-                letter-spacing: 35PX;  //文字間距
+                letter-spacing: 15PX;  //文字間距
             }
 
         </style>
