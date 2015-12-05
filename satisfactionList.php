@@ -22,7 +22,7 @@ $stmt = $conn->query("select  qb.qst_name,answer
        and qb.qstb_id = qd.qstb_id  
        and qst_type='act'
        and qi.qst_name='".$active."'
-        and qst_date between '" . $d1 . "' and '" . $d2 . "'
+        and start_date between '" . $d1 . "' and '" . $d2 . "'
          and qi.store_id='".$store_id."'
          order by  qb.qst_name
         ");
