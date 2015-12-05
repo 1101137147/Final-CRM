@@ -1,6 +1,9 @@
 <?php
-//include './db.php';
-//header("Content-Type:text/html; charset=utf-8");
+include './db.php';
+session_start() ;
+$store_id=$_SESSION['store_id'];
+header("Content-Type:text/html; charset=utf-8");
+
 //$stmt = $conn->prepare("SELECT subname,path  FROM subfunction WHERE functionid='2'");
 //$stmt->execute();
 //$res='';
@@ -26,17 +29,34 @@
         <script>
             $(document).ready(function() {
                 $("#btn1").click(function() {
+
                     var d1 = $("#date1").val();
                     var d2 = $("#date2").val();
-                    /alert( d1 +"and"+ d2);/
-                    if((d1!=='')&&(d2!=='')){
+                    var gender = $("#gender").val();
+                    var buyquantity=$("#buyquantity").val();
+                    var qdquantity=$("#qdquantity").val();
+                    var totalpoint=$("#totalpoint").val();
+                    $.ajax({
+                        url: "membuylist.php",
+                        data: {date1: $("#date1").val(), date2: $("#date2").val(), gender: $("#gender").val(), 
+                        buyquantity: $("#buyquantity").val(), qdquantity: $("#qdquantity").val(), totalpoint: $("#totalpoint").val()},
+                        type: "GET",
+                        success: function(info1) {
+                            document.getElementById("info1").innerHTML = info1;
+                            //$('#info1').DataTable();
+                        },
+                        error: function(info1) {
+                            document.getElementById("info1").innerHTML = "error";
+                        }
+                    });
+                    /*if((d1!=='')&&(d2!=='')){
                           if(d1>d2){
                             alert("開始日期不能大於結束日期");
                         }
                         if(d1<d2){
                     $.ajax({
                         url: "membuylist.php",
-                        data: {date1: $("#date1").val(), date2: $("#date2").val()},
+                        data: {date1: $("#date1").val(), date2: $("#date2").val(), gender: $("#gender").val()},
                         type: "GET",
                         success: function(info1) {
                             document.getElementById("info1").innerHTML = info1;
@@ -51,7 +71,8 @@
                 }
                 }else{
                     alert("請選擇日期")
-                }
+                }*/
+
                 });
             });
         </script>
@@ -86,11 +107,6 @@
                 <a href="index.php" rel="external" class="ui-btn ui-btn-inline ui-corner-all ui-icon-home ui-shadow ui-btn-icon-left" style="margin-top:2%;font-size:120%;">首頁</a>
                 <a href="member.php" rel="external" class="ui-btn ui-btn-inline ui-corner-all ui-icon-back ui-shadow ui-btn-icon-left" style="margin-top:2%;font-size:120%;">返回</a>
                 <h1 id="title">會員忠誠度</h1>
-                <!--                <div data-role="navbar" >
-                                    <ul>
-                <?php // echo $res; ?>
-                                    </ul>
-                                </div>-->
             </div> 
             <div data-role="main" class="ui-content ui-grid-a">
                 <table border="0" align="center">
@@ -100,7 +116,6 @@
                             <div class="ui-block-a">
                                 <input type="DATE" id="date1" >
                             </div>
-
                         </td>
                         <td><div>～</div></td>
                         <td>
@@ -108,14 +123,42 @@
                                 <input type="DATE" id="date2" >
                             </div>
                         </td>
+                        <td>選擇性別：</td>
+                        <td>
+                            <select name="gender" id="gender" width="300">
+                                <option value=" "> </option>
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" align="center">
+                    <tr>
+                        <td>購買次數</td>
+                        <td>
+                            <input type="text" name="buyquantity" id="buyquantity"> 
+                        </td>
+                        <td>填寫問卷次數</td>
+                        <td>
+                            <input type="text" name="qdquantity" id="qdquantity">
+                        </td>
+                        <td>擁有點數</td>
+                        <td>
+                             <input type="text" name="totalpoint" id="totalpoint">
+                        </td>
                         <td>
                             <input type="button" id="btn1" value="確定">
 
                         </td>
-            　</tr>
+            　       </tr>
                 </table>
+                <!--
                 <table id="info1" data-role="table"  class="ui-responsive" border="1">
-                </table>
+                </table> 
+                -->
+
+                <div id="info1"></div>
             </div>
 
             <div data-role="footer" data-position="fixed">

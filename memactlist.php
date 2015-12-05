@@ -2,10 +2,13 @@
 include './db.php';
 $num1 = $_GET['text1'];
 $num2 = $_GET['text2'];
+session_start() ;
+$store_id=$_SESSION['store_id'];
 $stmt=$conn->query("select name,gender,cellphone,count(s.mem_id) as buycount,Round(COUNT(s.mem_id)/(DATEDIFF('".$num2."','".$num1."'))*100,2) AS percent 
 From shopdetail as s,member as m 
 Where s.mem_id=m.mem_id 
 and buy_date between '".$num1."' and '".$num2."'
+and s.store_id='".$store_id."'
 Group by name,gender,cellphone");
 //$stmt=$conn->query("select m.mem_id,name,gender,count(s.mem_id) as buycount,
 //ROUND(COUNT(s.mem_id)/(SELECT COUNT(mem_id) FROM shopdetail)*100,2) AS percent 
