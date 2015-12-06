@@ -36,54 +36,54 @@ header("Content-Type:text/html; charset=utf-8");
                     var buyquantity=$("#buyquantity").val();
                     var qdquantity=$("#qdquantity").val();
                     var totalpoint=$("#totalpoint").val();
-                    $.ajax({
-                        url: "membuylist.php",
-                        data: {date1: $("#date1").val(), date2: $("#date2").val(), gender: $("#gender").val(), 
-                        buyquantity: $("#buyquantity").val(), qdquantity: $("#qdquantity").val(), totalpoint: $("#totalpoint").val()},
-                        type: "GET",
-                        success: function(info1) {
-                            document.getElementById("info1").innerHTML = info1;
-                            //$('#info1').DataTable();
-                        },
-                        error: function(info1) {
-                            document.getElementById("info1").innerHTML = "error";
+                    if((d1=='')&&(d2=='')&&(gender=='')&&(buyquantity=='')&&(qdquantity=='')&&(totalpoint=='')){
+                        alert("請選擇最少1項填寫");
+                    }else{
+                        if((d1!=='')&&(d2=='')){
+                            alert("需要選擇結束日期");
+                        }else if((d1=='')&&(d2!=='')){
+                            alert("需要選擇開始日期");
+                        }else{
+                            if((d1!=='')&&(d2!=='')){
+                                if(d1>d2){
+                                    alert("開始日期不能大於結束日期");
+                                }
+                                if(d1<d2){
+                                        $.ajax({
+                                            url: "membuylist.php",
+                                            data: {date1: $("#date1").val(), date2: $("#date2").val(), gender: $("#gender").val(), 
+                                                    buyquantity: $("#buyquantity").val(), qdquantity: $("#qdquantity").val(), totalpoint: $("#totalpoint").val()},
+                                            type: "GET",
+                                            success: function(info1) {
+                                                document.getElementById("info1").innerHTML = info1;
+                                                            $('#info1').DataTable();
+                                                },
+                                            error: function(info1) {
+                                                document.getElementById("info1").innerHTML = "error";
+                                                }
+                                        });
+                                }
+                            }else{
+                                $.ajax({
+                                            url: "membuylist.php",
+                                            data: {date1: $("#date1").val(), date2: $("#date2").val(), gender: $("#gender").val(), 
+                                                    buyquantity: $("#buyquantity").val(), qdquantity: $("#qdquantity").val(), totalpoint: $("#totalpoint").val()},
+                                            type: "GET",
+                                            success: function(info1) {
+                                                document.getElementById("info1").innerHTML = info1;
+                                                            $('#info1').DataTable();
+                                                },
+                                            error: function(info1) {
+                                                document.getElementById("info1").innerHTML = "error";
+                                                }
+                                        });
+                            }
                         }
-                    });
-                    /*if((d1!=='')&&(d2!=='')){
-                          if(d1>d2){
-                            alert("開始日期不能大於結束日期");
-                        }
-                        if(d1<d2){
-                    $.ajax({
-                        url: "membuylist.php",
-                        data: {date1: $("#date1").val(), date2: $("#date2").val(), gender: $("#gender").val()},
-                        type: "GET",
-                        success: function(info1) {
-                            document.getElementById("info1").innerHTML = info1;
-                            $('#info1').DataTable();
-                            //$("#info1").html(info1);
-                            //alert(info1);  
-                        },
-                        error: function(info1) {
-                            document.getElementById("info1").innerHTML = "error";
-                        }
-                    });
-                }
-                }else{
-                    alert("請選擇日期")
-                }*/
-
+                    }
                 });
             });
         </script>
         <style>
-            /*            th {
-                            border-bottom: 1px solid #d6d6d6;         
-                        }
-            
-                        tr:nth-child(even) {
-                            background: #e9e9e9;
-                        }*/
             #info1 tr:nth-child(even) {
                 background:#d0d0d0;
             }
@@ -97,7 +97,7 @@ header("Content-Type:text/html; charset=utf-8");
             }
             #title{
                 font-size: 250%;
-                letter-spacing: 15PX;  //文字間距
+                letter-spacing: 15PX;  /*文字間距*/
             }
         </style>
     </head>
@@ -111,7 +111,7 @@ header("Content-Type:text/html; charset=utf-8");
             <div data-role="main" class="ui-content ui-grid-a">
                 <table border="0" align="center">
                     <tr>
-                        <td>請選擇活動日期：</td>
+                        <td>請選擇日期範圍：</td>
                         <td> 
                             <div class="ui-block-a">
                                 <input type="DATE" id="date1" >
@@ -126,7 +126,7 @@ header("Content-Type:text/html; charset=utf-8");
                         <td>選擇性別：</td>
                         <td>
                             <select name="gender" id="gender" width="300">
-                                <option value=" "> </option>
+                                <option value=""> </option>
                                 <option value="男">男</option>
                                 <option value="女">女</option>
                             </select>
@@ -135,15 +135,15 @@ header("Content-Type:text/html; charset=utf-8");
                 </table>
                 <table border="0" align="center">
                     <tr>
-                        <td>購買次數</td>
+                        <td>購買次數大於</td>
                         <td>
                             <input type="text" name="buyquantity" id="buyquantity"> 
                         </td>
-                        <td>填寫問卷次數</td>
+                        <td>填寫問卷次數大於</td>
                         <td>
                             <input type="text" name="qdquantity" id="qdquantity">
                         </td>
-                        <td>擁有點數</td>
+                        <td>擁有的點數大於</td>
                         <td>
                              <input type="text" name="totalpoint" id="totalpoint">
                         </td>
@@ -153,12 +153,10 @@ header("Content-Type:text/html; charset=utf-8");
                         </td>
             　       </tr>
                 </table>
-                <!--
+
                 <table id="info1" data-role="table"  class="ui-responsive" border="1">
                 </table> 
-                -->
 
-                <div id="info1"></div>
             </div>
 
             <div data-role="footer" data-position="fixed">

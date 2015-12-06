@@ -2,10 +2,14 @@
 include './db.php';
 $num1 = $_GET['text1'];
 $num2 = $_GET['text2'];
+session_start() ;
+$store_id=$_SESSION['store_id'];
 $stmt=$conn->query("select name,gender,cellphone,count(a.mem_id) as actcount,
 ROUND(COUNT(a.mem_id)/(SELECT COUNT(act_id) FROM activity)*100,2) AS percent 
-From act_record as a,member as m 
-Where a.mem_id=m.mem_id 
+From act_record as a,member as m,activity as act 
+Where a.mem_id=m.mem_id
+and act.act_id=a.act_id
+and act.store_id='".$store_id."'
 and join_date between '".$num1."' and '".$num2."'
 Group by name,gender,cellphone");
 //$stmt = $conn->query("select act_name,name,start_date,end_date 
