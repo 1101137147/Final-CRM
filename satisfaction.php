@@ -30,7 +30,7 @@ foreach ($stmt2->fetchAll(PDO::FETCH_ASSOC) as $row) {
         <script type="text/javascript" src="script/jquery.mobile.datebox.i18n.zh-TW.utf8.js"></script>
         <link rel="stylesheet" href="css/theme1.css">
         <link rel="stylesheet" type="text/css" href="css/datatables.min.css"/>
-        <script type="text/javascript" src="script/datatables.min.js"></script>
+        <script type="text/javascript"  src="script/datatables.min.js"></script>
         <script>
             $(document).ready(function() {
                 $("#chose").click(function() {
