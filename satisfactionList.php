@@ -14,6 +14,7 @@ $numa = 0; //算非常滿意百分比的變數
 $numb = 0; //算滿意百分比的變數
 $numc = 0; //算不滿意百分比的變數
 $numd = 0; //算非常不滿意百分比的變數
+$sum=0;
 $temp_name = "";
 
 $stmt = $conn->query("select  qb.qst_name,answer 
@@ -66,7 +67,7 @@ foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
         $d = $d + 1;
     }
 }
-
+$sum=$a+$b+$c+$d;
 $numa = round(($a / ($a + $b + $c + $d)), 4) * 100;    //計算非常滿意的百分比
 $numb = round(($b / ($a + $b + $c + $d)), 4) * 100;  //計算滿意的百分比
 $numc = round(($c / ($a + $b + $c + $d)), 4) * 100; //計算不滿意的百分比
@@ -82,4 +83,5 @@ $msg.="<td>" . $d . "</td>";
 $msg.="<td>" . $numd . "%"."</td></tr>";
 $msg.="</tbody>";
 echo $msg;
+echo "目前有".$sum."人填過此問卷";
 ?>

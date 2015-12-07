@@ -30,7 +30,7 @@ $msg = "";
 $msg.='<thead><tr><th width=15%>活動名稱</th><th width=15%>活動期間</th><th width=10%>活動人數</th><th width=10%>參與率</th></tr></thead><tbody>';
 foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
    
-    $msg.="<tr><td>" . $row['act_name'] . "</td><td>" . $row['date'] . "</td><td>" . $row['actcount'] . "</td><td>" . $row['percent'] . "</td></tr>";
+    $msg.="<tr><td>" . $row['act_name'] . "</td><td>" . $row['date'] . "</td><td>" . $row['actcount'] . "</td><td>" . $row['percent'] ."%". "</td></tr>";
 
 }
 $msg.="</tbody>";

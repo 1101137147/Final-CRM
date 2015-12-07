@@ -133,7 +133,6 @@ foreach ($stmt2->fetchAll(PDO::FETCH_ASSOC) as $row) {
                 </table> -->
                 <table id="info1" data-role="table"  class="ui-responsive" border="1">
                 </table>
-
             </div>
             <div data-role="footer" data-position="fixed">
                 <h1></h1>
