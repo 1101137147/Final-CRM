@@ -54,8 +54,8 @@ foreach ($stmt2->fetchAll(PDO::FETCH_ASSOC) as $row) {
                                     $('#info1').DataTable();
                                     //$("#info1").html(info1); 
                                 },
-                                error: function(info1) {
-                                    document.getElementById("info1").innerHTML = "error";
+                                error: function(qusum) {
+                                    document.getElementById("qusum").innerHTML = "error";
                                 }
                             });
                         }

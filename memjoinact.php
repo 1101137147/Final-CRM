@@ -50,8 +50,8 @@
                                 $('#info1').DataTable();
                                 //$("#info1").html(info1); 
                             },
-                            error: function(info1) {
-                                document.getElementById("info1").innerHTML = "error";
+                            error: function(actsum) {
+                                document.getElementById("actsum").innerHTML = "error";
 
                             }
                         });

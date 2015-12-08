@@ -49,13 +49,13 @@ foreach ($stmt2->fetchAll(PDO::FETCH_ASSOC) as $row) {
                         url: "storesatlist.php",
                         data: {date1: $("#date1").val(), date2: $("#date2").val(), active: $("#active").val()},
                         type: "GET",
-                        success: function(info1) {
-                            document.getElementById("info1").innerHTML = info1;
+                        success: function(qusum) {
+                            document.getElementById("qusum").innerHTML = qusum;
                             $('#info1').DataTable();
                             //$("#info1").html(info1); 
                         },
-                        error: function(info1) {
-                            document.getElementById("info1").innerHTML = "error";
+                        error: function(qusum) {
+                            document.getElementById("qusum").innerHTML = "error";
                         }
                     });
                 }
@@ -138,8 +138,11 @@ foreach ($stmt2->fetchAll(PDO::FETCH_ASSOC) as $row) {
                     <tr id="actname">  </tr><br>  
                     <tr id="info1" class="ui-responsive" border="1">      </tr>
                 </table> -->
-                <table id="info1" data-role="table"  class="ui-responsive" border="1">
-                </table>
+<!--                <table id="info1" data-role="table"  class="ui-responsive" border="1">
+                </table>-->
+                 <div id="qusum">
+
+                </div>
 
             </div>
             <div data-role="footer" data-position="fixed">
