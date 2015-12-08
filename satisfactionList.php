@@ -27,7 +27,7 @@ $stmt = $conn->query("select  qb.qst_name,answer
          and qi.store_id='".$store_id."'
          order by  qb.qst_name
         ");
-$msg = "";
+$msg = '<table id="info1" data-role="table"  class="ui-responsive" border="1">';
 $msg.='<thead><tr><th>問卷題目</th><th>非常滿意</th><th>百分比</th><th>滿意</th><th>百分比</th><th>不滿意</th><th>百分比</th><th>非常不滿意</th><th>百分比</th></tr></thead><tbody>';
 foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
     if ($temp_name == "")
@@ -67,7 +67,7 @@ foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
         $d = $d + 1;
     }
 }
-$sum=$a+$b+$c+$d;
+
 $numa = round(($a / ($a + $b + $c + $d)), 4) * 100;    //計算非常滿意的百分比
 $numb = round(($b / ($a + $b + $c + $d)), 4) * 100;  //計算滿意的百分比
 $numc = round(($c / ($a + $b + $c + $d)), 4) * 100; //計算不滿意的百分比
@@ -81,7 +81,8 @@ $msg.="<td>" . $c . "</td>";
 $msg.="<td>" . $numc ."%". "</td>";
 $msg.="<td>" . $d . "</td>";
 $msg.="<td>" . $numd . "%"."</td></tr>";
-$msg.="</tbody>";
+$msg.="</tbody></table>";
+$sum=$a+$b+$c+$d;
 echo $msg;
 echo "目前有".$sum."人填過此問卷";
 ?>

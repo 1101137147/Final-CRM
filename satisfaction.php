@@ -1,7 +1,7 @@
 <?php
 include './db.php';
-session_start() ;
-$store_id=$_SESSION['store_id'];
+session_start();
+$store_id = $_SESSION['store_id'];
 header("Content-Type:text/html; charset=utf-8");
 //$stmt = $conn->prepare("SELECT subname,path FROM subfunction WHERE functionid='1'");
 //$stmt->execute();
@@ -9,7 +9,7 @@ header("Content-Type:text/html; charset=utf-8");
 //foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
 //    $res.='<li><a href="' . $row['path'] . '.php" style="font-size:12pt" rel="external">' . $row['subname'] . '</a></li>';
 //}
-$stmt2 = $conn->prepare("SELECT qst_name  FROM questionnaire  where qst_type='act' and questionnaire.store_id='".$store_id."'");
+$stmt2 = $conn->prepare("SELECT qst_name  FROM questionnaire  where qst_type='act' and questionnaire.store_id='" . $store_id . "'");
 $stmt2->execute();
 $res2 = '';
 foreach ($stmt2->fetchAll(PDO::FETCH_ASSOC) as $row) {
@@ -39,28 +39,30 @@ foreach ($stmt2->fetchAll(PDO::FETCH_ASSOC) as $row) {
                     var active = $("#active").val();
                     //   document.getElementById("actname").innerHTML = active;
                     //    /alert( d1 +"and"+ d2);/
-                    if((d1!=='')&&(d2!=='')){
-                        if(d1>d2){
+                    if ((d1 !== '') && (d2 !== '')) {
+                        if (d1 > d2) {
                             alert("開始日期不能大於結束日期");
                         }
-                        if(d1<d2){
-                    $.ajax({
-                        url: "satisfactionList.php",
-                        data: {date1: $("#date1").val(), date2: $("#date2").val(), active: $("#active").val()},
-                        type: "GET",
-                        success: function(info1) {
-                            document.getElementById("info1").innerHTML = info1;
-                            $('#info1').DataTable();
-                            //$("#info1").html(info1); 
-                        },
-                        error: function(info1) {
-                            document.getElementById("info1").innerHTML = "error";
+                        if (d1 < d2) {
+                            $.ajax({
+                                url: "satisfactionList.php",
+                                data: {date1: $("#date1").val(), date2: $("#date2").val(), active: $("#active").val()},
+                                type: "GET",
+                                success: function(qusum) {
+                                    console.log(qusum);
+                                    document.getElementById("qusum").innerHTML = qusum;
+                                    $('#info1').DataTable();
+                                    //$("#info1").html(info1); 
+                                },
+                                error: function(info1) {
+                                    document.getElementById("info1").innerHTML = "error";
+                                }
+                            });
                         }
-                    });
-                }
-            }else(
-                    alert("請選擇日期")
-                    )
+                    } else
+                        (
+                                alert("請選擇日期")
+                                )
                 });
             });
 
@@ -93,7 +95,7 @@ foreach ($stmt2->fetchAll(PDO::FETCH_ASSOC) as $row) {
                 <h1 id="title">活動滿意度</h1>
                 <!--                <div data-role="navbar" >
                                     <ul>
-                <?php // echo $res; ?>
+<?php // echo $res;  ?>
                                     </ul>
                                 </div>-->
             </div>
@@ -117,7 +119,7 @@ foreach ($stmt2->fetchAll(PDO::FETCH_ASSOC) as $row) {
                         <td>選擇問卷名稱：</td>
                         <td>
                             <select name="active" id="active" width="300">
-                                <?php echo $res2; ?>
+<?php echo $res2; ?>
                             </select>
                         </td>
                         <td>
@@ -131,10 +133,14 @@ foreach ($stmt2->fetchAll(PDO::FETCH_ASSOC) as $row) {
                     <tr id="actname">  </tr><br>  
                     <tr id="info1" class="ui-responsive" border="1">      </tr>
                 </table> -->
-                <table id="info1" data-role="table"  class="ui-responsive" border="1">
-                </table>
+<!--                <table id="info1" data-role="table"  class="ui-responsive" border="1">
+                </table>-->
 
+                <div id="qusum">
+
+                </div>
             </div>
+
             <div data-role="footer" data-position="fixed">
                 <h1></h1>
             </div>

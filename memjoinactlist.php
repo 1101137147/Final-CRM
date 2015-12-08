@@ -24,13 +24,14 @@ $sum="";
 foreach ($stmt2->fetchAll(PDO::FETCH_ASSOC) as $row2) {
     $sum.=$row2['act'];
 }
-$msg = "";
+
+$msg = '<table id="info1" data-role="table"  class="ui-responsive" border="1">';
 $msg.='<thead><tr><th>會員姓名</th><th>性別</th><th>手機</th><th>參與活動數</th><th>活躍率</th></tr></thead><tbody>';
 foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
     $msg.="<tr><td>" . $row['name'] . "</td><td>" . $row['gender'] . "</td><td>" . $row['cellphone'] . "</td><td>" . $row['actcount'] . "</td><td>" . $row['percent'] ."%". "</td></tr>";
     $count = $count + 1;
 }
-$msg.="</tbody>";
+$msg.="</tbody></table>";
 echo  $msg;
 echo "目前有".$sum."個活動";
 ?>

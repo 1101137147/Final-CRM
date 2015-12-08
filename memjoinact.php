@@ -45,8 +45,8 @@
                             url: "memjoinactlist.php",
                             data: {text1: $("#date1").val(), text2: $("#date2").val()},
                             type: "GET",
-                            success: function(info1) {
-                                document.getElementById("info1").innerHTML = info1;
+                            success: function(actsum) {
+                                document.getElementById("actsum").innerHTML = actsum;
                                 $('#info1').DataTable();
                                 //$("#info1").html(info1); 
                             },
@@ -122,9 +122,9 @@
                         </td>
             　</tr>
                 </table>
-
-                <table id="info1" data-role="table"  class="ui-responsive" border="1">
-                </table>
+                <div id="actsum">
+                    
+                </div>
             </div>
         </div>
         <div data-role="footer" data-position="fixed">
